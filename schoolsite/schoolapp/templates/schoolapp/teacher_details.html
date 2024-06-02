@@ -1,0 +1,49 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+
+
+
+<h1>Teacher detail page</h1>
+
+<li>
+    id: {{ teacher.id }}
+
+</li>
+
+<li>
+    username: {{ teacher.username}}
+
+</li>
+
+<li>
+    first name: {{ teacher.first_name}}
+
+</li>
+
+<li>
+    lastname : {{ teacher.last_name}}
+
+</li>
+
+<li>
+    dob: {{ teacher.dob}}
+
+</li>
+
+<li>
+    role: {{ teacher.role}}
+
+</li>
+
+
+<li>
+    {{ teacher.email}}
+
+</li>
+
+{% endblock %}
+
+
+

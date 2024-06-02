@@ -1,0 +1,56 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+
+    {% if user.role == 'ADMIN' or user.is_superuser %}
+    <a href="{% url "users:addproduct" %}">Add product</a>
+
+    {% endif %}
+
+
+    {% for p in products %}
+
+
+    <div class="container mt-5 ">
+        <div class="row">
+            <div class="col-2">
+                <img src="{{ p.prod_img.url }}" height ='120px' width ='200px'>
+            </div>
+            <div class="col-3 bg-light ">
+                <h1>{{ p.prod_name }}</h1>
+                <p>{{ p.prod_desc | truncatewords:10 }}</p>
+            </div>
+            <div class="col-4 bg-warning ">
+
+                <form method='POST'>
+                    {% csrf_token %}
+                    <label> <h1>{{ p.prod_price }} Rs/-</h1> </label><br>
+                  
+
+            
+            
+
+            </div>
+            <div class="col-3 pt-4 bg-danger ">
+                {% if user.is_authenticated and user.role == 'STUDENT' or user.role == 'TEACHER' %}
+
+                    <a class='btn btn-success' href="{% url "users:order" p.id %}">Add to Cart</a>
+                </form>
+                {% elif user.is_authenticated and user.is_superuser or user.role == 'ADMIN' %}
+
+                    <a class='btn btn-success' href="#">Add to Cart</a>
+                    <a class='btn btn-outline-warning ' href="#">Edit</a>
+                    <a class='btn btn-danger' href="#">Delete</a>
+
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endfor %}
+
+
+{% endblock %}

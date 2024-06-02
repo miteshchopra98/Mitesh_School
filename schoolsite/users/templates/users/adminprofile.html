@@ -1,0 +1,60 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+<style>
+    .shaded-row {
+        background-color: #f0f8ff; /* Replace with your preferred background color */
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-dark mt-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0 text-center ">Admin Profile</h5>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="{{ user.admin_image.url }}" class="rounded-circle" alt="Admin Image" style="width: 120px; height: 120px;">
+                    </div>
+                    <table class="table table-bordered table-dark">
+                        <tr >
+                            <td>Admin ID:</td>
+                            <td>{{ user.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Username:</td>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <td>First Name:</td>
+                            <td>{{ user.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name:</td>
+                            <td>{{ user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Birth:</td>
+                            <td>{{ user.dob }}</td>
+                        </tr>
+                        <tr>
+                            <td>Age:</td>
+                            <td>{{ user.age }}</td>
+                        </tr>
+                        <tr>
+                            <td>Role:</td>
+                            <td>{{ user.role }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

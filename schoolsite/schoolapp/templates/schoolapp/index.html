@@ -1,0 +1,158 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+{% load static %}
+
+<style>
+    body {
+        background: url( {% static 'regback.jpg' %} ) center center fixed;
+        background-size: cover;
+        color: #ffffff; /* Text color for better visibility on the image */
+        font-family: 'Open Sans', sans-serif; /* Example: Change to a Google Font */
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.6); /* Dark overlay to improve text readability */
+        padding: 50px;
+        text-align: center;
+    }
+
+    .school-title {
+        color: #fed136; /* Yellow text color */
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    .info-container {
+        margin-top: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .badge-danger {
+        background-color: #dc3545; /* Red background color for the "New" badge */
+        font-size: 16px;
+        margin-left: 5px;
+    }
+
+    .apply-btn {
+        margin-top: 20px;
+    }
+
+    .competition-container {
+        margin-top: 30px;
+    }
+
+    .competition-card {
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff; /* White background color */
+        padding: 20px;
+    }
+
+    .competition-img {
+        width: 100%;
+        height: auto;
+        max-height: 200px; /* Set the maximum height for the images */
+        object-fit: cover; /* Cover the entire container without distortion */
+        border-radius: 8px;
+        margin-bottom: 15px; /* Add space below the image */
+    }
+
+    .competition-title {
+        font-size: 24px;
+        color: #343a40; /* Dark gray text color */
+        margin-bottom: 10px; /* Add space below the title */
+    }
+
+    .competition-desc {
+        color: #6c757d; /* Gray text color */
+        margin-bottom: 15px; /* Add space below the description */
+    }
+
+    .apply-link {
+        background-color: #28a745; /* Green background color for the "Apply" link */
+        color: #ffffff; /* White text color for the link */
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        display: inline-block; /* Align with other inline elements */
+    }
+
+    .apply-link:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+
+    .create-competition-btn {
+        background-color: #28a745; /* Green background color for the "Create Competition" button */
+        color: #ffffff; /* White text color for the button */
+        padding: 12px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        display: inline-block; /* Align with other inline elements */
+    }
+
+    .create-competition-btn:hover {
+        background-color: #218838; /* Darker green on hover */
+    }
+</style>
+
+<div class="overlay">
+    <h1 class="school-title">Mitesh Chopra International High School</h1>
+
+    <div class="info-container">
+        <h1>Seats available, apply now!<span class="badge badge-danger">New</span></h1>
+        <a class="btn btn-primary apply-btn" href="{% url 'users:studentreg' %}" role="button">APPLY</a>
+    </div>
+
+    {% if user.is_authenticated and user.role == 'STUDENT' %}
+        <div class="competition-container">
+            {% for c in comp1 %}
+                <div class="container mt-5 competition-card">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ c.sport_image.url }}" alt="{{ c.sport }}" class="competition-img">
+                        </div>
+                        <div class="col-md-8">
+                            <h1 class="competition-title">{{ c.sport }}</h1>
+                            <p class="competition-desc">{{ c.sport_desc|truncatewords:20 }}</p>
+                            <a href="{% url 'users:competitionapply' c.id %}" class="btn btn-success apply-link">Apply</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% elif user.is_authenticated and user.role == 'TEACHER' or user.role == 'ADMIN' or user.is_superuser %}
+        <div class="container mt-5">
+            <div class="row align-items-end">
+                <div class="col-12 col-md-4 offset-md-4">
+                    <a href="{% url 'users:competitionform' %}" class="btn btn-success create-competition-btn">Create new Sport</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="competition-container">
+            {% for c in comp1 %}
+                <div class="container mt-5 competition-card">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ c.sport_image.url }}" alt="{{ c.sport }}" class="competition-img">
+                        </div>
+                        <div class="col-md-8">
+                            <h1 class="competition-title">{{ c.sport }}</h1>
+                            <p class="competition-desc">{{ c.sport_desc|truncatewords:20 }}</p>
+                            <a href="#" class="btn btn-success apply-link">Apply</a>
+                        </div>
+                    </div>
+                </div>
+              {% endfor %}
+          </div>
+    {% endif %}
+</div>
+{% endblock %}

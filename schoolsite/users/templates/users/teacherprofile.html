@@ -1,0 +1,49 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-4 mx-auto text-center bg-dark text-white" id="prof" style="border: 1px solid black; padding: 10px; margin: 10px;">
+
+        <h2>Teacher Profile</h2>
+
+        <table class="table table-hover table-bordered table-dark">
+            <tr>
+                <td colspan="2">
+                    <img src="{{ teacherprof.teacher_image.url }}" class="mx-auto d-block" height="100px" width="100px" alt="Teacher Image">
+                </td>
+            </tr>
+            <tr>
+                <td>Teacher ID:</td>
+                <td>{{ teacherprof.id }}</td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td>{{ teacheruser.username }}</td>
+            </tr>
+            <tr>
+                <td>Full Name:</td>
+                <td>{{ teacheruser.first_name }} {{ teacheruser.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ teacheruser.email }}</td>
+            </tr>
+            <tr>
+                <td>Date of Birth:</td>
+                <td>{{ teacheruser.dob }}</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>{{ teacheruser.age }}</td>
+            </tr>
+            <tr>
+                <td>Role:</td>
+                <td>{{ teacheruser.role }}</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

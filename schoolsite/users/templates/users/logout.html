@@ -1,0 +1,24 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+    <h1 class="display-4 mb-4">Logout</h1>
+
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+
+        <h4 class="mb-3">Are you sure you want to logout?</h4>
+
+        <button type="submit" class="btn btn-danger mr-2" style="width: 120px;">
+            <i class="fas fa-check-circle mr-2"></i> Yes
+        </button>
+
+        <a href="{% url 'schoolapp:index' %}" class="btn btn-dark" style="width: 120px;">
+            <i class="fas fa-times-circle mr-2"></i> No
+        </a>
+    </form>
+
+    <!-- Font Awesome CDN for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-Hj+Od4cHQsREzEGl/iPec5LESc8umNK3Q4KbAn4AegA5Y1rm9M1Zd8otO6oQuCa6" crossorigin="anonymous"></script>
+</div>
+{% endblock %}

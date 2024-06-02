@@ -1,0 +1,19 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+  <div class="container">
+    <h1>Student Detail Page</h1>
+
+    <ul class="student-details">
+      <li><strong>ID:</strong> {{ student.id }}</li>
+      <li><strong>Username:</strong> {{ student.username }}</li>
+      <li><strong>First Name:</strong> {{ student.first_name }}</li>
+      <li><strong>Last Name:</strong> {{ student.last_name }}</li>
+      <li><strong>Date of Birth:</strong> {{ student.dob }}</li>
+      <li><strong>Role:</strong> {{ student.role }}</li>
+      <li><strong>Email:</strong> {{ student.email }}</li>
+    </ul>
+  </div>
+
+{% endblock %}

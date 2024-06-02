@@ -1,0 +1,33 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 text-white ">Sport Form</h1>
+    
+    <form enctype = 'multipart/form-data' method='POST' class="mx-auto"> 
+        {% csrf_token %}
+        <table class='table table-bordered table-striped table-dark mt-3'> 
+            <tbody>
+                <tr>
+                    <td>Sport Name: </td>
+                    <td>{{ form.sport }}</td>
+                </tr>
+                <tr>
+                    <td>Sport Description</td>
+                    <td>{{ form.sport_desc }}</td>
+                </tr>
+                <tr>
+                    <td>Sport Image</td>
+                    <td>{{ form.sport_image }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center"> 
+                        <button type='submit' class='btn btn-success'>Submit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock %}

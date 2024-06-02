@@ -1,0 +1,38 @@
+
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+
+
+<h1 class='bg-success '>Congratulations you have successfully applied for {{s.sport }} event</h1>
+
+
+
+    <table class='table table-active table-bordered table-striped'>
+        <tbody>
+        <tr class='bg-primary '>
+        <th>Student Name: </th>
+        <td>{{ user.first_name }}  {{ user.last_name }}</td>
+        </tr>
+        <tr>
+        <th>Sport Name: </th>
+        <td>{{ s.sport }}</td>
+        </tr>
+        <tr>
+        <th>Sport Description</th>
+        <td>{{ s.sport_desc }}</td>
+        </tr>
+        <tr>
+        <td><img src="{{ s.sport_image.url }}" height='200px' width='300px'></td>
+        </tr>
+        
+        </tbody>
+        </table>
+
+
+
+
+
+
+{% endblock %}

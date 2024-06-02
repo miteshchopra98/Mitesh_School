@@ -1,0 +1,45 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+
+
+
+<form enctype = 'multipart/form-data' method="POST">
+
+    {% csrf_token %}
+
+    Added_by = {{ form.added_by }}
+    prod_id = {{ form.prod_id }}
+    prod_name = {{ form.prod_name }}
+    prod_desc = {{ form.prod_desc }}
+    prod_price = {{ form.prod_price }}
+    prod_img = {{ form.prod_img }}
+
+    <button type = 'submit'> Save </button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

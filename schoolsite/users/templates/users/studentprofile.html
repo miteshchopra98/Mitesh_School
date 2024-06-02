@@ -1,0 +1,170 @@
+{% extends "schoolapp/base.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-4" style="border: 1px solid black;">
+   
+        <div class="card mt-3 bg-dark">
+            <img src="{{ studentprof.student_image.url }}" class="card-img-top mx-auto mt-2" alt="Student Image" style="width: 100px; height: 120px;">
+            <div class="card-body">
+                <table class="table table-hover table-striped table-bordered table-dark">
+                    <tr>
+                        <td>Student ID:</td>
+                        <td>{{ studentprof.id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Username:</td>
+                        <td>{{ studentuser.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>First Name:</td>
+                        <td>{{ studentuser.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>{{ studentuser.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>{{ studentuser.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>DoB:</td>
+                        <td>{{ studentuser.dob}}</td>
+                    </tr>
+                    <tr>
+                        <td>Age:</td>
+                        <td>{{ studentuser.age}}</td>
+                    </tr>
+                    <tr>
+                        <td>Role:</td>
+                        <td>{{ studentuser.role}}</td>
+                    </tr>
+         
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4" style="border: 1px solid black;">
+
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'TEACHER' %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="card mt-3 bg-dark">
+                        <div class="card-body">
+                            <table class="table table-hover table-striped table-bordered-dark table-dark">
+                                <tr>
+                                    <td class='bg-primary'>English</td>
+                                    <td>{{ form.English }}</td>
+                                </tr>
+                                <tr>
+                                    <td class='bg-primary'>Hindi</td>
+                                    <td>{{ form.Hindi }}</td>
+                                </tr>
+                                <tr>
+                                    <td class='bg-primary'>Marathi</td>
+                                    <td>{{ form.Marathi }}</td>
+                                </tr>
+                                <tr>
+                                    <td class='bg-primary'>Maths</td>
+                                    <td>{{ form.Maths }}</td>
+                                </tr>
+                                <tr>
+                                    <td class='bg-primary'>Science</td>
+                                    <td>{{ form.Science }}</td>
+                                </tr>
+                                <tr>
+                                    <td class='bg-primary'>Total</td>
+                                    <td>{{ form.Total }}</td>
+                                </tr>
+
+                  
+                                <tr>
+                                    <td><button type='submit' class='btn btn-success'>Submit</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            {% elif user.role == 'STUDENT' %}
+                <div class="card mt-3 bg-dark">
+                    <div class="card-body">
+                        <table class="table table-hover table-striped table-bordered table-light">
+                            <tr>
+                                <td>English</td>
+                                <td>{{ studentmks.English }}</td>
+                            </tr>
+                            <tr>
+                                <td>Hindi</td>
+                                <td>{{ studentmks.Hindi }}</td>
+                            </tr>
+                            <tr>
+                                <td>Marathi</td>
+                                <td>{{ studentmks.Marathi }}</td>
+                            </tr>
+                            <tr>
+                                <td>Maths</td>
+                                <td>{{ studentmks.Maths }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Science</td>
+                                <td>{{ studentmks.Science }}</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{ studentmks.Total }}</td>
+                            </tr>
+                       
+                        </table>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="col-sm-4" style="border: 1px solid black;">
+  
+        <div class="card mt-3 bg-dark">
+            <div class="card-body">
+                <h5 class="card-title text-white ">Applied Sports Competitions</h5>
+                {% for c in studentsports %}
+                    <table class="table table-hover table-bordered table-primary mt-2">
+                        <tr>
+                            <td class='bg-success text-white text-center'>{{ c }}</td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-sm mt-3">
+    <div class="row">
+        <div class="col">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title text-white">Ordered Products</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for order in orders %}
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="{{ order.prod_ordered.prod_img.url }}" alt="" style="width: 150px; margin-right: 10px;">
+                                <div>
+                                    <p>{{ order.prod_ordered.prod_name }}</p>
+                                    <p>${{ order.prod_ordered.prod_price }}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
